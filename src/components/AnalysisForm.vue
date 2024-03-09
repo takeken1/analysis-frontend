@@ -16,12 +16,11 @@
   
   export default defineComponent({
     name: 'AnalysisForm',
-    setup() {
+    setup(props, { emit }) {
       const userInput = ref('');
   
       const submitForm = () => {
-        console.log(userInput.value); // 本来はここでバックエンドAPIにリクエストを送る
-        // 例: axios.post('/api/analyze', { input: userInput.value })
+        emit('submit', userInput.value); // 親コンポーネントにユーザー入力を送信
       };
   
       return {
@@ -31,8 +30,4 @@
     },
   });
   </script>
-  
-  <style scoped>
-  /* ここにスタイルを追加 */
-  </style>
   
