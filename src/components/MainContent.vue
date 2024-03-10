@@ -22,14 +22,14 @@ export default defineComponent({
 
     const handleSubmit = async (userInput: string) => {
       try {
-        // POSTリクエストのボディを指定されたJSON形式に修正
+        // バックエンドAPIにプロンプトを送信
         const response = await axios.post('http://127.0.0.1:8080/api/analysis/chat', {
           message: userInput,
         });
         analysisResult.value = response.data; // APIのレスポンスを直接結果にセット
       } catch (error) {
+        // エラーハンドリング
         console.error("APIからのデータ取得に失敗しました。", error);
-        // エラーハンドリングをここで行う
       }
     };
 
