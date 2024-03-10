@@ -1,29 +1,27 @@
 <template>
-    <div v-if="result">
-      <h1>分析結果</h1>
-      <p><strong>As-Is：</strong>{{ result.asIs }}</p>
-      <p><strong>To-Be：</strong>{{ result.toBe }}</p>
-      <!-- 他の結果も同様に表示 -->
-    </div>
-  </template>
-  
-  <script lang="ts">
-  import { defineComponent } from 'vue';
-  import type { PropType } from 'vue';
-  
-  export default defineComponent({
-    name: 'AnalysisResult',
-    props: {
-      result: Object as PropType<{
-        asIs: string;
-        toBe: string;
-        // 他のプロパティ定義
-      }>,
+  <div v-if="result">
+    <h1>分析結果</h1>
+    <!-- choices 配列の最初の要素の message.content にバインド -->
+    <p v-if="result.choices && result.choices.length > 0">
+      <strong>アドバイス：</strong>{{ result.choices[0].message.content }}
+    </p>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  name: 'AnalysisResult',
+  props: {
+    result: {
+      type: Object,
+      default: () => ({}),
     },
-  });
-  </script>
-  
-  <style scoped>
-  /* ここにスタイルを追加 */
-  </style>
-  
+  },
+});
+</script>
+
+<style scoped>
+/* スタイル設定（変更不要） */
+</style>
